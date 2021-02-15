@@ -1,0 +1,78 @@
+<!DOCTYPE html> {% load static %}
+<html>
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+
+<body>
+    <nav class="nav navbar-default navbar-static-top">
+        <div class="container">
+
+            <ul class="nav justify-content-start">
+                <li class='nav-item'>
+                    <a class="navbar-brand justify-content-start" href="#">BRAND</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin:index' %}"> Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'blog:post_draft_list' %}">My Blog</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'blog:About' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="https://www.github.com">Github</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="https://www.linkedin.com">LinkedIn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'blog:Login' %}">Login</a>
+                </li>
+                <li><i class="glyphicon glyphicon-user"></i></li>
+
+
+            </ul class="nav justify-content-end">
+            {% if user.is_authenticated %}
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'blog:post_details' %}">New Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'blog:index' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a>Welcome {{user.username}}</a>
+                </li>
+                {% else %}
+                <li><a class=n av navbar-end href="{% url 'login' %}"><span><i class="glyphicon glyphicon-user" ></i></span></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block body_block %}
+
+        <!-- Anything in here is extended -->
+        {% endblock %}
+    </div>
+</body>
+
+</html>
